@@ -1,0 +1,34 @@
+services:
+  nzkoreapost-scraper:
+    build:
+      context: /Users/yanggun7201/Development/NZKoreaPostInterestScraper
+      dockerfile: /Users/yanggun7201/clawd/general_apps/my_docker_services/nzkoreapost-scraper/Dockerfile
+    container_name: nzkoreapost-scraper
+    env_file:
+      - /Users/yanggun7201/Development/NZKoreaPostInterestScraper/.env
+    volumes:
+      - nzkoreapost-data:/app/data
+    restart: unless-stopped
+
+  naver-stock-tracker:
+    image: node:22-alpine
+    container_name: naver-stock-tracker
+    working_dir: /app
+    volumes:
+      - /Users/yanggun7201/Development/NaverStockTracker:/app
+    env_file:
+      - /Users/yanggun7201/Development/NaverStockTracker/.env
+    command: node index.js
+    restart: unless-stopped
+
+  naver-stock-consensus-tracker:
+    build:
+      context: /Users/yanggun7201/Development/NaverStockConsensusTracker
+      dockerfile: /Users/yanggun7201/clawd/general_apps/my_docker_services/naver-stock-consensus-tracker/Dockerfile
+    container_name: naver-stock-consensus-tracker
+    env_file:
+      - /Users/yanggun7201/Development/NaverStockConsensusTracker/.env
+    restart: unless-stopped
+
+volumes:
+  nzkoreapost-data:
