@@ -1,11 +1,11 @@
 services:
   nzkoreapost-scraper:
     build:
-      context: /Users/yanggun7201/Development/NZKoreaPostInterestScraper
-      dockerfile: /Users/yanggun7201/clawd/general_apps/my_docker_services/nzkoreapost-scraper/Dockerfile
+      context: ${NZKOREAPOST_DIR}
+      dockerfile: ${SERVICES_DIR}/nzkoreapost-scraper/Dockerfile
     container_name: nzkoreapost-scraper
     env_file:
-      - /Users/yanggun7201/Development/NZKoreaPostInterestScraper/.env
+      - ${NZKOREAPOST_DIR}/.env
     volumes:
       - nzkoreapost-data:/app/data
     restart: unless-stopped
@@ -15,19 +15,19 @@ services:
     container_name: naver-stock-tracker
     working_dir: /app
     volumes:
-      - /Users/yanggun7201/Development/NaverStockTracker:/app
+      - ${STOCK_TRACKER_DIR}:/app
     env_file:
-      - /Users/yanggun7201/Development/NaverStockTracker/.env
+      - ${STOCK_TRACKER_DIR}/.env
     command: node index.js
     restart: unless-stopped
 
   naver-stock-consensus-tracker:
     build:
-      context: /Users/yanggun7201/Development/NaverStockConsensusTracker
-      dockerfile: /Users/yanggun7201/clawd/general_apps/my_docker_services/naver-stock-consensus-tracker/Dockerfile
+      context: ${STOCK_CONSENSUS_DIR}
+      dockerfile: ${SERVICES_DIR}/naver-stock-consensus-tracker/Dockerfile
     container_name: naver-stock-consensus-tracker
     env_file:
-      - /Users/yanggun7201/Development/NaverStockConsensusTracker/.env
+      - ${STOCK_CONSENSUS_DIR}/.env
     restart: unless-stopped
 
 volumes:
