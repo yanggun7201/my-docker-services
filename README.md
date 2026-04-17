@@ -44,6 +44,22 @@ docker compose up -d --build
 docker compose up -d --build nzkoreapost-scraper
 ```
 
+### 특정 서비스만 재시작
+
+```bash
+docker compose restart nzkoreapost-scraper
+```
+
+### .env 수정 후 재시작
+
+`restart`는 환경변수를 다시 읽지 않는다. `.env` 변경 후에는 `up`을 사용:
+
+```bash
+docker compose up -d nzkoreapost-scraper
+```
+
+나머지 서비스는 영향 없이 해당 서비스만 환경변수를 다시 읽고 재시작된다.
+
 ### 중지
 
 ```bash
