@@ -28,6 +28,8 @@ services:
     container_name: naver-stock-consensus-tracker
     env_file:
       - ${STOCK_CONSENSUS_DIR}/.env
+    security_opt:
+      - seccomp=unconfined
     restart: unless-stopped
 
 volumes:
